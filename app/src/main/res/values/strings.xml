@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+
+    // Pokemon Fragment Strings
+    <string name="pokemon_name">Name</string>
+    <string name="pokemon_type">Type</string>
+    <string name="pokemon_weight">Weight</string>
+    <string name="pokemon_height">Height</string>
+    <string name="pokemon_HP">HP</string>
+    <string name="pokemon_attack">Attack</string>
+    <string name="pokemon_defense">Defense</string>
+    <string name="pokemon_spattack">Special Attack</string>
+    <string name="pokemon_spdefense">Special Defense</string>
+    <string name="pokemon_speed">Speed</string>
+
+
+</resources>
