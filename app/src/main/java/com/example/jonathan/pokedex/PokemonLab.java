@@ -21,7 +21,22 @@ public class PokemonLab {
 
     private PokemonLab(Context context) {
         mPokedex = new ArrayList<>();
-        // Input Pokemon
+        // Golbat
+        Pokemon golbat = new Pokemon();
+        golbat.setImage(R.drawable.golbat);
+        golbat.setName("Golbat");
+        golbat.setType("Poison/Flying");
+        golbat.setWeight(60.1f);
+        golbat.setHeight(1.59f);
+        golbat.setHP(75);
+        golbat.setAttack(80);
+        golbat.setDefense(70);
+        golbat.setSpAttack(65);
+        golbat.setSpDefense(75);
+        golbat.setSpeed(90);
+        mPokedex.add(golbat);
+
+        // Test Pokemon
         for (int i = 0; i < 20; i++) {
             Pokemon pokemon = new Pokemon();
             pokemon.setImage(R.drawable.gem_pal);

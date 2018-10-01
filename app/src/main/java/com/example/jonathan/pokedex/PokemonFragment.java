@@ -50,10 +50,10 @@ public class PokemonFragment extends Fragment {
         mPokemonType.setText(mPokemon.getType());
 
         TextView mPokemonWeight = (TextView) v.findViewById(R.id.pokemonWeight);
-        mPokemonWeight.setText("Weight: " + mPokemon.getWeight());
+        mPokemonWeight.setText("" + mPokemon.getWeight() + "kg");
 
         TextView mPokemonHeight = (TextView) v.findViewById(R.id.pokemonHeight);
-        mPokemonHeight.setText("Height: " + mPokemon.getHeight());
+        mPokemonHeight.setText("" + mPokemon.getHeight() + "m");
 
         TextView mPokemonHP = (TextView) v.findViewById(R.id.pokemonHP);
         mPokemonHP.setText("HP: " + mPokemon.getHP());
