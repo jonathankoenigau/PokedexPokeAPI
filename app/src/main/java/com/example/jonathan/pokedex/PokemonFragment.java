@@ -2,24 +2,37 @@ package com.example.jonathan.pokedex;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jonathan.pokedex.models.Pokemon;
+import com.example.jonathan.pokedex.networking.GetPokemonDataService;
+import com.example.jonathan.pokedex.networking.PokemonClientReference;
+
+import java.io.IOException;
 import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class PokemonFragment extends Fragment {
 
     // Variables holds the current Pokemon
-    private String mPokemon;
+    private Pokemon mPokemon;
 
     private static final String ARG_POKEMON_ID = "pokemon_id";
 
-    public static PokemonFragment newInstance(String pokemonId) {
+    public static PokemonFragment newInstance(Pokemon pokemon) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_POKEMON_ID, pokemonId);
+        //args.putString(ARG_POKEMON_ID, pokemonId);
+        //mPokemon = pokemon;
+        //Log.d("Pokemon Name Test", pokemon.pokemon_name);
 
         PokemonFragment fragment = new PokemonFragment();
         fragment.setArguments(args);
@@ -30,8 +43,8 @@ public class PokemonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String pokemonId = (String) getArguments().getSerializable(ARG_POKEMON_ID);
-        mPokemon = pokemonId;
+        //String pokemonId = (String) getArguments().getString(ARG_POKEMON_ID);
+
         //mPokemon = PokemonLab.get(getActivity()).getPokemon(pokemonId);
     }
 
@@ -44,9 +57,10 @@ public class PokemonFragment extends Fragment {
         //ImageView mPokemonImage = (ImageView) v.findViewById(R.id.pokemonImage);
         //mPokemonImage.setImageResource(mPokemon.getImage());
 
-        TextView mPokemonName = (TextView) v.findViewById(R.id.pokemonName);
-        mPokemonName.setText(mPokemon.getName());
+        //TextView mPokemonName = (TextView) v.findViewById(R.id.pokemonName);
+        //mPokemonName.setText(mPokemon.pokemon_name);
 
+        /*
         TextView mPokemonType = (TextView) v.findViewById(R.id.pokemonType);
         mPokemonType.setText(mPokemon.getType());
 
@@ -73,6 +87,7 @@ public class PokemonFragment extends Fragment {
 
         TextView mPokemonSpeed = (TextView) v.findViewById(R.id.pokemonSpeed);
         mPokemonSpeed.setText("Speed: " + mPokemon.getSpeed());
+        */
 
         return v;
     }

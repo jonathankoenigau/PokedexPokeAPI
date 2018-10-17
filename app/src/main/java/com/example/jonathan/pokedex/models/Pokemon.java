@@ -1,10 +1,13 @@
 package com.example.jonathan.pokedex.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Pokemon {
+public class Pokemon{
 
     @SerializedName("name")
     public String pokemon_name;

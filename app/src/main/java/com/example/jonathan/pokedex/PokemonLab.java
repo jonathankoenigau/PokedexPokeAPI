@@ -22,7 +22,7 @@ public class PokemonLab {
     private PokemonLab(Context context) {
         mPokedex = new ArrayList<>();
 
-        mPokedex.add("Golbat");
+        mPokedex.add("golbat");
 
         /**
         // Old Code
