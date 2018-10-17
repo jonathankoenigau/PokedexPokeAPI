@@ -10,7 +10,7 @@ import java.util.UUID;
 public class PokemonLab {
 
     private static PokemonLab sPokemonLab;
-    private List<Pokemon> mPokedex;
+    private List<String> mPokedex;
 
     public static PokemonLab get(Context context) {
         if(sPokemonLab == null) {
@@ -21,7 +21,12 @@ public class PokemonLab {
 
     private PokemonLab(Context context) {
         mPokedex = new ArrayList<>();
-        // Golbat
+
+        mPokedex.add("Golbat");
+
+        /**
+        // Old Code
+         // Golbat
         Pokemon golbat = new Pokemon();
         golbat.setImage(R.drawable.golbat);
         golbat.setName("Golbat");
@@ -191,13 +196,13 @@ public class PokemonLab {
          */
     }
 
-    public List<Pokemon> getPokedex() {
+    public List<String> getPokedex() {
         return mPokedex;
     }
 
-    public Pokemon getPokemon(UUID id) {
-        for (Pokemon pokemon : mPokedex) {
-            if (pokemon.getID().equals(id)) {
+    public String getPokemon(String name) {
+        for (String pokemon : mPokedex) {
+            if (pokemon.equals(name)) {
                 return pokemon;
             }
         }

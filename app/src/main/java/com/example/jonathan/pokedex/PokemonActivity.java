@@ -16,11 +16,11 @@ public class PokemonActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
 
-        UUID pokemonId = (UUID) getIntent().getSerializableExtra(EXTRA_POKEMON_ID);
+        String pokemonId = (String) getIntent().getSerializableExtra(EXTRA_POKEMON_ID);
         return PokemonFragment.newInstance(pokemonId);
     }
 
-    public static Intent newIntent(Context packageContext, UUID pokemonId) {
+    public static Intent newIntent(Context packageContext, String pokemonId) {
         Intent intent = new Intent(packageContext, PokemonActivity.class);
         intent.putExtra(EXTRA_POKEMON_ID, pokemonId);
         return intent;

@@ -13,11 +13,11 @@ import java.util.UUID;
 public class PokemonFragment extends Fragment {
 
     // Variables holds the current Pokemon
-    private Pokemon mPokemon;
+    private String mPokemon;
 
     private static final String ARG_POKEMON_ID = "pokemon_id";
 
-    public static PokemonFragment newInstance(UUID pokemonId) {
+    public static PokemonFragment newInstance(String pokemonId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_POKEMON_ID, pokemonId);
 
@@ -28,10 +28,11 @@ public class PokemonFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState)
-        ;
-        UUID pokemonId = (UUID) getArguments().getSerializable(ARG_POKEMON_ID);
-        mPokemon = PokemonLab.get(getActivity()).getPokemon(pokemonId);
+        super.onCreate(savedInstanceState);
+
+        String pokemonId = (String) getArguments().getSerializable(ARG_POKEMON_ID);
+        mPokemon = pokemonId;
+        //mPokemon = PokemonLab.get(getActivity()).getPokemon(pokemonId);
     }
 
     @Override
@@ -40,8 +41,8 @@ public class PokemonFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_pokemon, container, false);
 
         // Set default values to the values of this Pokemon
-        ImageView mPokemonImage = (ImageView) v.findViewById(R.id.pokemonImage);
-        mPokemonImage.setImageResource(mPokemon.getImage());
+        //ImageView mPokemonImage = (ImageView) v.findViewById(R.id.pokemonImage);
+        //mPokemonImage.setImageResource(mPokemon.getImage());
 
         TextView mPokemonName = (TextView) v.findViewById(R.id.pokemonName);
         mPokemonName.setText(mPokemon.getName());

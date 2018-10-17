@@ -38,7 +38,7 @@ public class PokedexFragment extends Fragment {
 
     public void updateUI() {
         PokemonLab pokemonLab = PokemonLab.get(getActivity());
-        List<Pokemon> pokedex = pokemonLab.getPokedex();
+        List<String> pokedex = pokemonLab.getPokedex();
 
         if (mAdapter == null) {
             mAdapter = new PokemonAdapter(pokedex);
@@ -51,35 +51,35 @@ public class PokedexFragment extends Fragment {
 
     private class PokemonHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private Pokemon mPokemon;
-        private ImageView mPokemonImageView;
+        private String mPokemon;
+        //private ImageView mPokemonImageView;
         private TextView mNameTextView;
 
         public PokemonHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_pokemon, parent, false));
             itemView.setOnClickListener(this);
 
-            mPokemonImageView = (ImageView) itemView.findViewById(R.id.pokemonImage);
+            //mPokemonImageView = (ImageView) itemView.findViewById(R.id.pokemonImage);
             mNameTextView = (TextView) itemView.findViewById(R.id.pokemonName);
         }
 
-        public void bind(Pokemon pokemon) {
+        public void bind(String pokemon) {
             mPokemon = pokemon;
-            mPokemonImageView.setImageResource(mPokemon.getImage());
-            mNameTextView.setText(mPokemon.getName());
+            //mPokemonImageView.setImageResource(mPokemon.getImage());
+            mNameTextView.setText(mPokemon);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = PokemonActivity.newIntent(getActivity(), mPokemon.getID());
+            Intent intent = PokemonActivity.newIntent(getActivity(), mPokemon);
             startActivity(intent);
         }
     }
 
     private class PokemonAdapter extends RecyclerView.Adapter<PokemonHolder> {
-        private List<Pokemon> mPokedex;
+        private List<String> mPokedex;
 
-        public PokemonAdapter(List<Pokemon> pokedex) {
+        public PokemonAdapter(List<String> pokedex) {
             mPokedex = pokedex;
         }
 
@@ -92,7 +92,7 @@ public class PokedexFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull PokemonHolder holder, int position) {
-            Pokemon pokemon = mPokedex.get(position);
+            String pokemon = mPokedex.get(position);
             holder.bind(pokemon);
         }
 
