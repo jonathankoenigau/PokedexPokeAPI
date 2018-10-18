@@ -25,7 +25,6 @@ import retrofit2.Retrofit;
 public class PokemonActivity extends SingleFragmentActivity {
 
     public static final String EXTRA_POKEMON_ID = "com.example.jonathan.pokedex.pokemon_id";
-    Pokemon pokemon;
 
     // Activity creates pokemon view fragment
     @Override
@@ -33,9 +32,7 @@ public class PokemonActivity extends SingleFragmentActivity {
 
         String pokemonId = (String) getIntent().getSerializableExtra(EXTRA_POKEMON_ID);
 
-        pokeAPIRequest();
-
-        return PokemonFragment.newInstance(pokemon);
+        return PokemonFragment.newInstance(pokemonId);
     }
 
     public static Intent newIntent(Context packageContext, String pokemonId) {
@@ -44,36 +41,5 @@ public class PokemonActivity extends SingleFragmentActivity {
         intent.putExtra(EXTRA_POKEMON_ID, pokemonId);
         return intent;
 
-    }
-
-    private void pokeAPIRequest() {
-        String pokemonId = (String) getIntent().getSerializableExtra(EXTRA_POKEMON_ID);
-
-        // Retrofit sets up the connection to PokeAPI
-        Retrofit retrofit = PokemonClientReference.getRetrofitInstance();
-        GetPokemonDataService pokemonDataService = retrofit.create(GetPokemonDataService.class);
-
-        Call<Pokemon> pokemonCall = pokemonDataService.getPokemon(pokemonId);
-
-        Log.d("..." + pokemonId, "The Pokemon ID");
-
-        pokemon = new Pokemon();
-
-        // Execute the call and, if it succeeds, set it to a Pokemon object
-        //mPokemon = pokemonCall.execute().body();
-        pokemonCall.enqueue(new Callback<Pokemon>() {
-            @Override
-            public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
-                //pokemon = response.body();
-                Log.d("Response String", response.body().toString());
-            }
-
-            @Override
-            public void onFailure(Call<Pokemon> call, Throwable t) {
-                Log.d("Call Failure", "A call was made, but it failed");
-            }
-        });
-
-        Log.d("Done", "This actually finished.");
     }
 }

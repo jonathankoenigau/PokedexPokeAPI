@@ -24,15 +24,14 @@ import retrofit2.Retrofit;
 public class PokemonFragment extends Fragment {
 
     // Variables holds the current Pokemon
+    private String mPokemonId;
     private Pokemon mPokemon;
 
     private static final String ARG_POKEMON_ID = "pokemon_id";
 
-    public static PokemonFragment newInstance(Pokemon pokemon) {
+    public static PokemonFragment newInstance(String pokemonId) {
         Bundle args = new Bundle();
-        //args.putString(ARG_POKEMON_ID, pokemonId);
-        //mPokemon = pokemon;
-        //Log.d("Pokemon Name Test", pokemon.pokemon_name);
+        args.putString(ARG_POKEMON_ID, pokemonId);
 
         PokemonFragment fragment = new PokemonFragment();
         fragment.setArguments(args);
@@ -43,7 +42,7 @@ public class PokemonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //String pokemonId = (String) getArguments().getString(ARG_POKEMON_ID);
+        mPokemonId = (String) getArguments().getString(ARG_POKEMON_ID);
 
         //mPokemon = PokemonLab.get(getActivity()).getPokemon(pokemonId);
     }
@@ -52,6 +51,33 @@ public class PokemonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Sets the Pokemon layout.
         View v = inflater.inflate(R.layout.fragment_pokemon, container, false);
+
+        // Retrofit sets up the connection to PokeAPI
+        Retrofit retrofit = PokemonClientReference.getRetrofitInstance();
+        GetPokemonDataService pokemonDataService = retrofit.create(GetPokemonDataService.class);
+
+        Call<Pokemon> pokemonCall = pokemonDataService.getPokemon(mPokemonId);
+
+        Log.d("..." + mPokemonId, "The Pokemon ID");
+
+        mPokemon = new Pokemon();
+
+        // Execute the call and, if it succeeds, set it to a Pokemon object
+        //mPokemon = pokemonCall.execute().body();
+        pokemonCall.enqueue(new Callback<Pokemon>() {
+            @Override
+            public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
+                mPokemon = response.body();
+                Log.d("Response String", mPokemon.pokemon_name);
+            }
+
+            @Override
+            public void onFailure(Call<Pokemon> call, Throwable t) {
+                Log.d("Call Failure", "A call was made, but it failed");
+            }
+        });
+
+        Log.d("Done", "This actually finished.");
 
         // Set default values to the values of this Pokemon
         //ImageView mPokemonImage = (ImageView) v.findViewById(R.id.pokemonImage);

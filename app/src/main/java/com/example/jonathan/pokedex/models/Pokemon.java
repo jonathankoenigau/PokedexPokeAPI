@@ -26,7 +26,7 @@ public class Pokemon{
 
     public class PokemonType {
         @SerializedName("type")
-        public ArrayList<Type> pokemon_types;
+        public Type pokemon_types;
 
         public class Type {
             @SerializedName("name")
@@ -36,7 +36,7 @@ public class Pokemon{
 
     public class PokemonStat {
         @SerializedName("stat")
-        public ArrayList<Stat> pokemon_stats;
+        public Stat pokemon_stats;
 
         @SerializedName("base_stat")
         public int pokemon_base_stat;
