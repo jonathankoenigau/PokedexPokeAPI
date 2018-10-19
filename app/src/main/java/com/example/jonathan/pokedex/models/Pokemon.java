@@ -24,6 +24,9 @@ public class Pokemon{
     @SerializedName("stats")
     public ArrayList<PokemonStat> pokemon_stats;
 
+    @SerializedName("sprites")
+    public Sprite pokemon_sprites;
+
     public class PokemonType {
         @SerializedName("type")
         public Type pokemon_types;

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.example.jonathan.pokedex.models.Pokemon;
 import com.example.jonathan.pokedex.networking.GetPokemonDataService;
 import com.example.jonathan.pokedex.networking.PokemonClientReference;
+import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -62,6 +64,21 @@ public class PokemonFragment extends Fragment {
 
         mPokemon = new Pokemon();
 
+        final Picasso picasso = new Picasso.Builder(getActivity()).downloader(new OkHttp3Downloader(retrofit.callFactory())).build();
+
+        // Set Views to variables
+        final ImageView mPokemonImage = (ImageView) v.findViewById(R.id.pokemonImage);
+        final TextView mPokemonName = (TextView) v.findViewById(R.id.pokemonName);
+        final TextView mPokemonType = (TextView) v.findViewById(R.id.pokemonType);
+        final TextView mPokemonWeight = (TextView) v.findViewById(R.id.pokemonWeight);
+        final TextView mPokemonHeight = (TextView) v.findViewById(R.id.pokemonHeight);
+        final TextView mPokemonHP = (TextView) v.findViewById(R.id.pokemonHP);
+        final TextView mPokemonAttack = (TextView) v.findViewById(R.id.pokemonAttack);
+        final TextView mPokemonDefense = (TextView) v.findViewById(R.id.pokemonDefense);
+        final TextView mPokemonSpAttack = (TextView) v.findViewById(R.id.pokemonSpAttack);
+        final TextView mPokemonSpDefense = (TextView) v.findViewById(R.id.pokemonSpDefense);
+        final TextView mPokemonSpeed = (TextView) v.findViewById(R.id.pokemonSpeed);
+
         // Execute the call and, if it succeeds, set it to a Pokemon object
         //mPokemon = pokemonCall.execute().body();
         pokemonCall.enqueue(new Callback<Pokemon>() {
@@ -69,6 +86,33 @@ public class PokemonFragment extends Fragment {
             public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
                 mPokemon = response.body();
                 Log.d("Response String", mPokemon.pokemon_name);
+
+                mPokemonName.setText(mPokemon.pokemon_name);
+
+                /**
+                mPokemonType.setText(mPokemon.getType());
+
+                mPokemonWeight.setText("" + mPokemon.getWeight() + "kg");
+
+                mPokemonHeight.setText("" + mPokemon.getHeight() + "m");
+
+                mPokemonHP.setText("HP: " + mPokemon.getHP());
+
+                mPokemonAttack.setText("Atk: " + mPokemon.getAttack());
+
+                mPokemonDefense.setText("Def: " + mPokemon.getDefense());
+
+                mPokemonSpAttack.setText("Sp. Atk: " + mPokemon.getSpAttack());
+
+                mPokemonSpDefense.setText("Sp. Def: " + mPokemon.getSpDefense());
+
+                mPokemonSpeed.setText("Speed: " + mPokemon.getSpeed());
+                */
+
+                picasso.load(mPokemon.pokemon_sprites.pokemon_default_front)
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.gem_pal)
+                        .into(mPokemonImage);
             }
 
             @Override
@@ -77,43 +121,11 @@ public class PokemonFragment extends Fragment {
             }
         });
 
-        Log.d("Done", "This actually finished.");
+        Log.d("After Call Block", "Code after call block is running.");
 
-        // Set default values to the values of this Pokemon
         //ImageView mPokemonImage = (ImageView) v.findViewById(R.id.pokemonImage);
         //mPokemonImage.setImageResource(mPokemon.getImage());
 
-        //TextView mPokemonName = (TextView) v.findViewById(R.id.pokemonName);
-        //mPokemonName.setText(mPokemon.pokemon_name);
-
-        /*
-        TextView mPokemonType = (TextView) v.findViewById(R.id.pokemonType);
-        mPokemonType.setText(mPokemon.getType());
-
-        TextView mPokemonWeight = (TextView) v.findViewById(R.id.pokemonWeight);
-        mPokemonWeight.setText("" + mPokemon.getWeight() + "kg");
-
-        TextView mPokemonHeight = (TextView) v.findViewById(R.id.pokemonHeight);
-        mPokemonHeight.setText("" + mPokemon.getHeight() + "m");
-
-        TextView mPokemonHP = (TextView) v.findViewById(R.id.pokemonHP);
-        mPokemonHP.setText("HP: " + mPokemon.getHP());
-
-        TextView mPokemonAttack = (TextView) v.findViewById(R.id.pokemonAttack);
-        mPokemonAttack.setText("Atk: " + mPokemon.getAttack());
-
-        TextView mPokemonDefense = (TextView) v.findViewById(R.id.pokemonDefense);
-        mPokemonDefense.setText("Def: " + mPokemon.getDefense());
-
-        TextView mPokemonSpAttack = (TextView) v.findViewById(R.id.pokemonSpAttack);
-        mPokemonSpAttack.setText("Sp. Atk: " + mPokemon.getSpAttack());
-
-        TextView mPokemonSpDefense = (TextView) v.findViewById(R.id.pokemonSpDefense);
-        mPokemonSpDefense.setText("Sp. Def: " + mPokemon.getSpDefense());
-
-        TextView mPokemonSpeed = (TextView) v.findViewById(R.id.pokemonSpeed);
-        mPokemonSpeed.setText("Speed: " + mPokemon.getSpeed());
-        */
 
         return v;
     }
