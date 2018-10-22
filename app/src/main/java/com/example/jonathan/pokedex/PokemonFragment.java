@@ -89,25 +89,29 @@ public class PokemonFragment extends Fragment {
 
                 mPokemonName.setText(mPokemon.pokemon_name);
 
-                /**
-                mPokemonType.setText(mPokemon.getType());
+                String type = mPokemon.pokemon_types.get(0).pokemon_types.pokemon_type_name;
 
-                mPokemonWeight.setText("" + mPokemon.getWeight() + "kg");
+                if(mPokemon.pokemon_types.size() == 2) {
+                    type += "/" + mPokemon.pokemon_types.get(1).pokemon_types.pokemon_type_name;
+                }
 
-                mPokemonHeight.setText("" + mPokemon.getHeight() + "m");
+                mPokemonType.setText(type);
 
-                mPokemonHP.setText("HP: " + mPokemon.getHP());
+                mPokemonWeight.setText("" + mPokemon.pokemon_weight + "kg");
 
-                mPokemonAttack.setText("Atk: " + mPokemon.getAttack());
+                mPokemonHeight.setText("" + mPokemon.pokemon_height + "m");
 
-                mPokemonDefense.setText("Def: " + mPokemon.getDefense());
+                mPokemonHP.setText("HP: " + mPokemon.pokemon_stats.get(0).pokemon_base_stat);
 
-                mPokemonSpAttack.setText("Sp. Atk: " + mPokemon.getSpAttack());
+                mPokemonAttack.setText("Atk: " + mPokemon.pokemon_stats.get(1).pokemon_base_stat);
 
-                mPokemonSpDefense.setText("Sp. Def: " + mPokemon.getSpDefense());
+                mPokemonDefense.setText("Def: " + mPokemon.pokemon_stats.get(2).pokemon_base_stat);
 
-                mPokemonSpeed.setText("Speed: " + mPokemon.getSpeed());
-                */
+                mPokemonSpAttack.setText("Sp. Atk: " + mPokemon.pokemon_stats.get(3).pokemon_base_stat);
+
+                mPokemonSpDefense.setText("Sp. Def: " + mPokemon.pokemon_stats.get(4).pokemon_base_stat);
+
+                mPokemonSpeed.setText("Speed: " + mPokemon.pokemon_stats.get(5).pokemon_base_stat);
 
                 picasso.load(mPokemon.pokemon_sprites.pokemon_default_front)
                         .placeholder(R.drawable.ic_launcher_foreground)
