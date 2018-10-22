@@ -59,7 +59,6 @@ public class PokedexFragment extends Fragment {
             super(inflater.inflate(R.layout.list_item_pokemon, parent, false));
             itemView.setOnClickListener(this);
 
-            //mPokemonImageView = (ImageView) itemView.findViewById(R.id.pokemonImage);
             mNameTextView = (TextView) itemView.findViewById(R.id.pokemonName);
         }
 
